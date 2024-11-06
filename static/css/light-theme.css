@@ -1,0 +1,40 @@
+:root{
+    --background-5: rgba(18, 18, 18, 0.05);
+    --background-90:#E6E6E6;
+    --background-100:#ffffff;
+    --background-200:#E5E5E5;
+
+    --background-dark-200:#121212;
+
+
+    --text-prime-100:#121212;
+    --text-prime-300:#666666;
+
+    --text-prime-invert-300:#CCCCCC;
+}
+
+.bg-dark200{
+    background-color: var(--background-dark-200);
+}
+
+.bg90{
+    background-color: var(--background-90);
+}
+
+.bg100{
+    background-color: var(--background-100);
+}
+
+.bg200{
+    background-color: var(--background-200);
+}
+
+.textprime300{
+    color: var(--text-prime-300);
+}
+
+
+.textprimeinvert300{
+    color: var(--text-prime-invert-300);
+}
+

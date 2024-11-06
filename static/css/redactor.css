@@ -1,0 +1,104 @@
+.redactor {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.redactor span{
+    height: 70px;
+    display: flex;
+
+    border-radius: 16px 16px 0px 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+
+}
+
+.buttonstack{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.redactor button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    height: 160px;
+    transition: all 0.1s ease-in-out;    
+}
+
+.redactor button img{
+    width: 100%;
+    height: 100%;
+    max-height: 80px;
+    object-fit: contain;
+    
+}
+
+.redactor button:hover{
+    transform: translate(0, -30px);
+    transition: all 0.1s ease-in-out;
+}
+
+.tooltip{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    margin-bottom: 8px;
+    opacity: 0;
+    top: -40px;
+    transform: translate(0, 60px);
+    transition: all 0.1s ease-in-out;
+}
+
+.tooltiptext{
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    overflow: hidden;
+    border-radius: 4px;
+    height: 28px;
+    background-color: var(--background-dark-200);
+}
+
+.tooltipcorner{
+    height: 8px !important;
+}
+
+.redactor button:hover .tooltip{
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+    transform: translate(0, 0);
+}
+
+.savebutton{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--background-5) !important;
+    height: 40px !important;
+    width: auto !important;
+    margin-top: 16px;
+}
+
+.savebutton:hover{
+    background: var(--background-90);
+    transform: 0;
+    transform: scale(0.98) !important;
+
+    transition: all 0.1s ease-in-out;
+}

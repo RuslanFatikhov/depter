@@ -1,0 +1,35 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 100px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    bottom: 0;
+    left: 50%;
+    height: 28px;
+    align-items: center;
+    transform: translateX(-50%);
+    padding: 2px 8px;
+    border-radius: 8px;
+    display: none; /* Скрыта по умолчанию */
+    z-index: 1000;
+    background-color: var(--background-dark-200);
+}
+
+
+@media screen and (max-width: 700px) {  
+    body{
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+

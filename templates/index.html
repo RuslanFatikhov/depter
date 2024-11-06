@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depter - Custom Editor</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/light-theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/redactor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/typo.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editor.css') }}">
+</head>
+
+<body class="bg200">
+
+    <!--Editor-->
+    <div class="editor" id="editor">
+        <!-- Блоки будут динамически добавляться здесь -->
+    </div>
+
+
+    <!--Redactor-->
+    <div class="redactor">
+        <span class="bg100">
+
+            <span class="buttonstack">
+                <!--Text-->
+                <button id="addTextBlock">
+
+                    <div class="tooltip">
+                        <div class="tooltiptext"><p class="textprimeinvert300">Текст</p></div>
+                        <img class="tooltipcorner" src="{{ url_for('static', filename='img/tooltip_corner.svg') }}">
+                    </div>
+
+                    <img src="{{ url_for('static', filename='img/redactor/text.svg') }}">
+                </button>
+
+                <!--Image-->
+                <button id="addImageBlock">
+                    
+
+                    <div class="tooltip">
+                        <div class="tooltiptext"><p class="textprimeinvert300">Картинка</p></div>
+                        <img class="tooltipcorner" src="{{ url_for('static', filename='img/tooltip_corner.svg') }}">
+                    </div>
+
+                    <img src="{{ url_for('static', filename='img/redactor/img.png') }}">
+                </button>
+
+                <!--Save-->
+                <button class="savebutton" id="saveContent">
+                    <p class="textprime200">Сохранить</p>
+                </button>
+            </span>
+
+        </span>
+    </div>
+
+    <!-- Плашка "Изменения сохранены" -->
+    <div id="saveNotification" class="notification">
+        <p class="textprimeinvert300">Изменения сохранены</p>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+</body>
+</html>
