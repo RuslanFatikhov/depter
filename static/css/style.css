@@ -12,19 +12,33 @@ body {
 
 .notification {
     position: fixed;
-    top: 20px;
-    bottom: 0;
+    top: -40px;  /* Изначально плашка скрыта сверху */
     left: 50%;
     height: 28px;
     align-items: center;
     transform: translateX(-50%);
     padding: 2px 8px;
     border-radius: 8px;
-    display: none; /* Скрыта по умолчанию */
+    display: flex;  /* Изменяем на flex для центровки содержимого */
+    justify-content: center;
     z-index: 1000;
     background-color: var(--background-dark-200);
+    opacity: 0;  /* Прозрачность в начале */
+    transition: opacity 0.1s ease, top 0.1s ease;  /* Плавные переходы для opacity и top */
 }
 
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.gap4{
+    gap: 4px;
+}
+
+.gap8{
+    gap: 8px;
+}
 
 @media screen and (max-width: 700px) {  
     body{

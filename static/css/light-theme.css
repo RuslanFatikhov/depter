@@ -11,6 +11,10 @@
     --text-prime-300:#666666;
 
     --text-prime-invert-300:#CCCCCC;
+
+
+    --text-error-100: #FF4747;
+    --bg-error-200: #F7D4D4;
 }
 
 .bg-dark200{
@@ -36,5 +40,9 @@
 
 .textprimeinvert300{
     color: var(--text-prime-invert-300);
+}
+
+.bgerror200{
+    background-color: var(--bg-error-200);
 }
 
