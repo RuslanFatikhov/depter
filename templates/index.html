@@ -14,6 +14,12 @@
 
 <body class="bg200">
 
+    <div class="article-info">
+        <div id="last-saved-time">Последнее сохранение: Никогда</div>
+        <h1 id="article-title" contenteditable="true">Заголовок статьи</h1>
+    </div>
+    
+
     <!--Editor-->
     <div class="editor" id="editor">
         <!-- Блоки будут динамически добавляться здесь -->
@@ -64,5 +70,5 @@
     </div>
     
     <script src="{{ url_for('static', filename='js/editor.js') }}"></script>
-</body>
+
 </html>

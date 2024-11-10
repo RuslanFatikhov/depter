@@ -3,7 +3,23 @@
     position: relative;
 }
 
-/* Добавьте эти стили в ваш CSS-файл */
+.article-info {
+    margin: 20px;
+    text-align: center;
+}
+
+#last-saved-time {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+#article-title {
+    font-size: 28px;
+    font-weight: bold;
+    outline: none;
+}
+
 
 .text-block {
     display: flex;
