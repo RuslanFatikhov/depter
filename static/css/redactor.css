@@ -41,7 +41,7 @@
     height: 100%;
     max-height: 80px;
     object-fit: contain;
-    
+
 }
 
 .redactor button:hover{
@@ -102,4 +102,36 @@
     transform: scale(0.98) !important;
 
     transition: all 0.1s ease-in-out;
+}
+
+.text-style-menu {
+    position: absolute;
+    flex-direction: row;
+    gap: 16px;
+    padding: 8px;
+    background-color: var(--background-100);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    z-index: 1000;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.text-style-menu button {
+    width: 86px;
+    height: 56px;
+    border-radius: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0.5;
+    transition: all 0.1s ease-in-out;
+}
+
+.text-style-menu button:hover {
+    background-color: var(--background-5);
+    transition: all 0.1s ease-in-out;
+    opacity: 1;
 }

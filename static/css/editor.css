@@ -3,6 +3,43 @@
     position: relative;
 }
 
+/* Добавьте эти стили в ваш CSS-файл */
+
+.text-block {
+    display: flex;
+    align-items: center;
+}
+
+.text-block h1,
+.text-block h2,
+.text-block p {
+    flex: 1;
+    margin: 0;
+}
+
+p[contenteditable="true"]:focus,
+h1[contenteditable="true"]:focus,
+h2[contenteditable="true"]:focus {
+    outline: none;
+}
+
+
+
+
+
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.delete-button img {
+    width: 24px;
+    height: 24px;
+}
+
+
 .block img{
     width: 100%;
     height: auto;
@@ -40,9 +77,7 @@
     outline: none;
 }
 
-.image-block {
 
-}
 
 .drop-zone {
     display: flex;

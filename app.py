@@ -34,10 +34,22 @@ def init_db():
     with app.app_context():
         db = get_db()
         cursor = db.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS blocks
-                          (id INTEGER PRIMARY KEY AUTOINCREMENT,
-                           block_type TEXT,
-                           content TEXT)''')
+
+        # Создаем таблицу, если она не существует
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS blocks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                block_type TEXT,
+                content TEXT
+            )
+        ''')
+
+        # Проверяем, есть ли столбец 'style' в таблице 'blocks'
+        cursor.execute("PRAGMA table_info(blocks)")
+        columns = [column[1] for column in cursor.fetchall()]
+        if 'style' not in columns:
+            cursor.execute('ALTER TABLE blocks ADD COLUMN style TEXT')
+
         db.commit()
 
 # Вызов функции для инициализации базы данных
@@ -55,7 +67,7 @@ def upload_image():
         return jsonify({'status': 'error', 'message': 'Файл не найден'}), 400
 
     file = request.files['image']
-    
+
     # Проверяем тип файла
     if file.mimetype not in ['image/jpeg', 'image/png', 'image/webp', 'image/gif']:
         return jsonify({'status': 'error', 'message': 'Неверный формат файла'}), 400
@@ -70,37 +82,54 @@ def upload_image():
 # Маршрут для сохранения данных
 @app.route('/save', methods=['POST'])
 def save():
-    data = request.json.get('content', [])
-    db = get_db()
-    cursor = db.cursor()
-    
-    # Очищаем таблицу перед сохранением новых данных
-    cursor.execute('DELETE FROM blocks')
-    db.commit()
+    try:
+        data = request.json.get('content', [])
+        db = get_db()
+        cursor = db.cursor()
 
-    # Сохраняем каждый блок в базу данных
-    for block in data:
-        if block['type'] == 'image':
-            content = block['data']  # Здесь будет путь к файлу изображения
-        else:
-            content = block['data']
-        cursor.execute('INSERT INTO blocks (block_type, content) VALUES (?, ?)',
-                       (block['type'], content))
-    db.commit()
+        # Очищаем таблицу перед сохранением новых данных
+        cursor.execute('DELETE FROM blocks')
+        db.commit()
 
-    return jsonify({'status': 'success', 'message': 'Content saved successfully'})
+        # Сохраняем каждый блок в базу данных
+        for block in data:
+            if block['type'] == 'image':
+                content = block['data']
+                cursor.execute('INSERT INTO blocks (block_type, content) VALUES (?, ?)',
+                               (block['type'], content))
+            elif block['type'] == 'text':
+                content = block['data']
+                style = block.get('style', 'p')  # Если стиль не указан, используем 'p'
+                cursor.execute('INSERT INTO blocks (block_type, content, style) VALUES (?, ?, ?)',
+                               (block['type'], content, style))
+        db.commit()
+
+        return jsonify({'status': 'success', 'message': 'Content saved successfully'})
+    except Exception as e:
+        print(f"Ошибка при сохранении: {e}")
+        return jsonify({'status': 'error', 'message': 'Ошибка при сохранении данных'}), 500
 
 # Маршрут для загрузки данных
 @app.route('/load', methods=['GET'])
 def load():
-    db = get_db()
-    cursor = db.cursor()
-    cursor.execute('SELECT block_type, content FROM blocks')
-    blocks = cursor.fetchall()
-    
-    # Преобразуем данные в список словарей
-    content = [{'type': block_type, 'data': content} for block_type, content in blocks]
-    return jsonify({'status': 'success', 'content': content})
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute('SELECT block_type, content, style FROM blocks')
+        blocks = cursor.fetchall()
+
+        # Преобразуем данные в список словарей
+        content = []
+        for block in blocks:
+            block_type, content_data, style = block
+            if block_type == 'text':
+                content.append({'type': 'text', 'data': content_data, 'style': style})
+            else:
+                content.append({'type': block_type, 'data': content_data})
+        return jsonify({'status': 'success', 'content': content})
+    except Exception as e:
+        print(f"Ошибка при загрузке: {e}")
+        return jsonify({'status': 'error', 'message': 'Ошибка при загрузке данных'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
